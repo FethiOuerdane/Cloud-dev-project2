@@ -14,10 +14,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{EBURL}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
+							"raw": "http://{{EB_URL}}/filteredimage?image_url=https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
 							"protocol": "http",
 							"host": [
-								"{{EBURL}}"
+								"{{EB_URL}}"
 							],
 							"path": [
 								"filteredimage"
@@ -38,10 +38,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{EBURL}}/filteredimage?image_url=https://i.imgur.com/VrxFCNq.png",
+							"raw": "http://{{EB_URL}}/filteredimage?image_url=https://i.imgur.com/VrxFCNq.png",
 							"protocol": "http",
 							"host": [
-								"{{EBURL}}"
+								"{{EB_URL}}"
 							],
 							"path": [
 								"filteredimage"
@@ -57,15 +57,39 @@
 					"response": []
 				},
 				{
+					"name": "Valid imageUrl 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{EB_URL}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+							"protocol": "http",
+							"host": [
+								"{{EB_URL}}"
+							],
+							"path": [
+								"filteredimage"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Case of no imageUrl",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{EBURL}}/filteredimage",
+							"raw": "http://{{EB_URL}}/filteredimage",
 							"protocol": "http",
 							"host": [
-								"{{EBURL}}"
+								"{{EB_URL}}"
 							],
 							"path": [
 								"filteredimage"
@@ -96,7 +120,58 @@
 							"query": [
 								{
 									"key": "image_url",
-									"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg"
+									"value": "https://timedotcom.files.wordpress.com/2019/03/kitten-report.jpg",
+									"description": "This url is invalid\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Case of Valid imageUrl 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/4/4d/Town_hall%2C_Christchurch_City%2C_New_Zealand.jpg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"filteredimage"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Town_hall%2C_Christchurch_City%2C_New_Zealand.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Case of Valid imageUrl 3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{PORT}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"filteredimage"
+							],
+							"query": [
+								{
+									"key": "image_url",
+									"value": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg"
 								}
 							]
 						}
@@ -175,8 +250,13 @@
 			"type": "string"
 		},
 		{
-			"key": "EBURL",
-			"value": "project2udagram.us-east-1.elasticbeanstalk.com",
+			"key": "EB_URL",
+			"value": "myudagramdev.us-east-1.elasticbeanstalk.com",
+			"type": "default"
+		},
+		{
+			"key": "PORT",
+			"value": "8082",
 			"type": "default"
 		}
 	]
