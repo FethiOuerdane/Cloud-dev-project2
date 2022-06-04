@@ -1,6 +1,6 @@
 import fs from "fs";
 import Jimp = require("jimp");
-
+const axios = require('axios').default;
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
 // returns the absolute path to the local image
@@ -11,17 +11,25 @@ import Jimp = require("jimp");
 export async function filterImageFromURL(inputURL: string): Promise<string> {
   return new Promise(async (resolve, reject) => {
     try {
-      const photo = await Jimp.read(inputURL);
+      // code for getting Buffer is 
+      // from https://www.fabiofranchino.com/log/get-the-image-buffer-using-axios-and-nodejs/
+      const response = await axios(inputURL, { responseType: 'arraybuffer' })
+      const buffer64 = Buffer.from(response.data, 'binary')
+     // Now using the Buffer to serve it to JIMP
+      const photo = await Jimp.read(buffer64);
       const outpath =
-        "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
+        "/tmp/filtered" + Math.floor(Math.random() * 2000) + ".jpg";
       await photo
         .resize(256, 256) // resize
         .quality(60) // set JPEG quality
         .greyscale() // set greyscale
-        .write(__dirname + outpath, (img) => {
+        .write(__dirname + outpath
+          , (img) => {
+         // console.log(__dirname + outpath);
           resolve(__dirname + outpath);
         });
     } catch (error) {
+      console.log(error);
       reject(error);
     }
   });
